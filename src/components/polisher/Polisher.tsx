@@ -8,11 +8,11 @@ function Polisher() {
 
     const improveBullet = async () => {
 
-        if(!input) return
+        if (!input) return
 
         setLoading(true)
 
-        try{
+        try {
 
             const response = await fetch('https://ai-bullet-point-polisher-backend.vercel.app/api/polish', {
                 method: 'POST',
@@ -25,21 +25,21 @@ function Polisher() {
             const data = await response.json()
 
             console.log('Improved Bullet Points:', data)
-            setOutput(data.output)
+            setOutput(data.polishedBullet)
 
 
-        }catch(error){
+        } catch (error) {
             console.error('Error improving bullet points:', error)
         }
 
-
+        setLoading(false)
     }
 
     return (
         <>
-            <h1 className="text-center mt-8 text-3xl font-bold">AI Bullet Point Polisher</h1>
+            <h1 className="text-center mt-8 text-3xl font-bold">AI CV Bullet Point Polisher</h1>
 
-            <div className='w-full flex justify-center mt-4'>
+            <div className='w-full flex justify-center mt-4 items-center gap-4'>
                 <input
                     name='input'
                     value={input}
@@ -47,6 +47,15 @@ function Polisher() {
                     placeholder="Enter your bullet points here..."
                     className="w-full p-4 mt-4 border rounded-lg resize-none md:w-1/2"
                 />
+                <button
+                    onClick={() => {
+                        setInput('')
+                        setOutput('')
+                    }}
+                    className="p-4 mt-4 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
+                >
+                    Clear
+                </button>
             </div>
 
             <div className='w-full flex justify-center mt-4'>
@@ -56,11 +65,14 @@ function Polisher() {
                 >
                     {loading ? 'Polishing...' : 'Polish'}
                 </button>
-
-                <p>{output}</p>
             </div>
 
-
+            {output && (
+                <div>
+                    <h2 className='text-left my-4 mx-4 font-bold'>Polished Bullet Point</h2>
+                    <p className='text-left my-4 mx-4'>{output}</p>
+                </div>
+            )}
 
         </>
     )
