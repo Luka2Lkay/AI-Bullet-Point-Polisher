@@ -1,12 +1,10 @@
-
 import './App.css'
+import Polisher from '../polisher/Polisher.tsx'
 
 function App() {
- 
-
   return (
     <>
-  <h1 className='text-red-500'>AI Bullet Point Polisher</h1>
+      <Polisher />
     </>
   )
 }
