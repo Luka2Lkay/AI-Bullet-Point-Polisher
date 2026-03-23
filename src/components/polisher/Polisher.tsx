@@ -14,7 +14,7 @@ function Polisher() {
 
         try{
 
-            const response = await fetch('https://ai-bullet-point-polisher-backend.vercel.app/', {
+            const response = await fetch('https://ai-bullet-point-polisher-backend.vercel.app/api/polish', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -23,6 +23,8 @@ function Polisher() {
             })
 
             const data = await response.json()
+
+            console.log('Improved Bullet Points:', data)
             setOutput(data.output)
 
 
